@@ -1,8 +1,8 @@
 <template>
   <div id="app">
   <nav>
-    <router-link to="/">Liste des films</router-link>
-    <router-link to="/favoris">Favoris</router-link>
+    <router-link to="/"><button type="button" class="btn btn-primary">Liste des films</button></router-link>
+    <router-link to="/favoris"><button type="button" class="btn btn-warning">Favoris</button></router-link>
   </nav>
   <router-view/>
 </div>
