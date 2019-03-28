@@ -1,22 +1,26 @@
 <template>
   <div class="liste">
-    <div class="holder">
+    <div class="row align-items-center" style="height: 100%">
+      <div class="col-md-6 mx-auto">
       <hr>
+
       <form @submit.prevent="addItem">
-        <div class="input">
-          <label>Tapez le nom du film (ou qzdqd ou qzddqz ou dwzdzq) :</label>
-          <input type="text" name="number" class="form-control" v-model="number" v-validate="'alpha'">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Rechercher</span>
+          </div>
+          <input type="text" class="form-control" v-model="number" v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username" aria-describedby="basic-addon1">
         </div>
       </form>
       <hr>
-
+      </div>
+    </div>
       <div id="app">
         <ul>
           <p v-for="data in jsonData">{{data}}</p>
         </ul>
       </div>
-  </div>
-  </div>
+      </div>
 </template>
 
 <style>
