@@ -67,14 +67,16 @@
 
                 while(this.position===-1){
                     //this.position = this.jsonData['data']['results'][this.number]['title'].search(this.title);
-                    this.position = this.jsonData['data']['results'][this.number]['title'].search(this.title);
-                    console.log(this.jsonData['data']['results'][this.number]['title']);
+                    this.position = this.jsonData['data']['results'][this.number]['title'].toLowerCase().search(this.title);
                     if(this.position!==-1){
                         this.json_match = this.jsonData['data']['results'][this.number];
+                        this.page=1;
                         break;
                     }
                     this.number++;
                 }
+                this.page++;
+                this.url = "https://api.themoviedb.org/3/discover/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&language=fr-FR&page="+this.page.toString();
 
 
 
