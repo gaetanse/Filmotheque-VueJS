@@ -13,18 +13,13 @@
 
 <script>
     export default {
-        name: 'About',
         data() {
             return {
-                film: this.$route.params.film,
                 favori: []
+            }},
+            methods: {
+                addFavori() {
+                }
             }
-        }
     }
 </script>
-<style>
-    .film {
-        font-size: 30px;
-        color: darkorange;
-    }
-</style>
