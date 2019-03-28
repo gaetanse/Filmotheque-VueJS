@@ -1,24 +1,12 @@
 <template>
   <div id="app">
   <nav>
-    <router-link to="/">Accueil</router-link>
-    <router-link to="/about">A propos</router-link>
+    <router-link to="/">Liste des films</router-link>
+    <router-link to="/favoris">Favoris</router-link>
   </nav>
   <router-view/>
 </div>
-
 </template>
-
-<script>
-import Items from './components/Items.vue'
-
-export default {
-  name: 'app',
-  components: {
-    Items
-  }
-}
-</script>
 
 <style>
 #app {

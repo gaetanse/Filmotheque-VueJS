@@ -1,9 +1,7 @@
 <template>
     <div class="about">
-        <h1>Page A propos...</h1>
-        <p>Page de démonstration pour le film
-            <span class="film">{{film}}</span>.
-        </p>
+        <h1>Page de vos films favoris</h1>
+        Vos favoris sont vides !
     </div>
 </template>
 
@@ -12,7 +10,8 @@
         name: 'About',
         data() {
             return {
-                film: this.$route.params.film
+                film: this.$route.params.film,
+                favori: []
             }
         }
     }
