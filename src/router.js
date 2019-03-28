@@ -1,19 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Items from './components/Items.vue';
-import About from './components/About.vue';
+import Liste from './components/Liste.vue';
+import Favoris from './components/Favoris.vue';
 Vue.use(Router);
 export default new Router({
     routes: [
         {
             path: '/',
-            name: 'items',
-            component: Items
+            name: 'liste',
+            component: Liste
         },
         {
-            path: '/about/:film',
-            name: 'about',
-            component: About
+            path: '/favoris/',
+            name: 'favoris',
+            component: Favoris
         }
     ]
 });

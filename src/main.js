@@ -2,17 +2,16 @@ import Vue from 'vue';
 import App from './App.vue';
 import VeeValidate from 'vee-validate';
 import router from './router';
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import ResetInput from 'v-reset-input';
+
 Vue.use(BootstrapVue);
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-import ResetInput from 'v-reset-input'
-
-Vue.use(ResetInput)
-
+Vue.use(ResetInput);
 Vue.use(VeeValidate);
 Vue.config.productionTip = false;
+
 new Vue({
   router,
   render: h => h(App),
