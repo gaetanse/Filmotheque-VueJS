@@ -11,22 +11,25 @@
                         <input type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title" v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </form>
-                {{ title }}
                 <hr>
-                {{ json_good }}
-                <hr>
-                <p v-for="data in jsonData">
-                    {{data['results']}}
-                </p>
-                <hr>
+                <h5 v-if="json_match">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ json_match['title'] }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + json_match['overview']" style="width: 30%;">
+                            <hr>
+                            <p class="card-text">{{ json_match['overview'] }}</p>
+                            <a href="#" class="btn btn-primary">Infos du film</a>
+                            <a href="#" class="btn btn-primary">Mettre en favoris</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ json_match['release_date']}}
+                        </div>
+                    </div>
+                </h5>
             </div>
-        </div>
-        <div id="app">
-            <ul>
-                <p v-for="data in jsonData">
-                    {{data}}
-                </p>
-            </ul>
         </div>
     </div>
 </template>
@@ -46,32 +49,58 @@
         data() {
             return {
                 jsonData: null,
-                json_good: null,
+                json_match: null,
                 page: 1,
                 page_max: 20402,
                 tab_id: [],
-                title : 0,
-                objetJS: null,
-                url: "https://api.themoviedb.org/3/discover/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&language=fr-FR&sort_by=original_title.desc&include_adult=false&include_video=false&page="+this.title+"",
+                number: 0,
+                position: -1,
+                title : "",
+                url: "https://api.themoviedb.org/3/discover/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&language=fr-FR&page=1",
             }},
         methods: {
             callMethod : function (){
-                //alert('Hello : '+ this.title);
-            }
+
+                this.number=0;
+                this.position=-1;
+                this.json_match= null;
+
+                while(this.position===-1){
+                    //this.position = this.jsonData['data']['results'][this.number]['title'].search(this.title);
+                    this.position = this.jsonData['data']['results'][this.number]['title'].search(this.title);
+                    console.log(this.jsonData['data']['results'][this.number]['title']);
+                    if(this.position!==-1){
+                        this.json_match = this.jsonData['data']['results'][this.number];
+                        break;
+                    }
+                    this.number++;
+                }
+
+
+
+
+              //  function estCerises() {
+               //     return this.json_match === this.title;
+               // }
+
+              //  this.jsonData['data']['results'][this.number]['title'].find(estCerises);
+
+              //  while(this.number<999){
+                //    if(this.jsonData['data']['results'][this.number]['title'].includes(this.title)){
+                     //   this.json_match = this.jsonData['data']['results'][this.number]['title'];
+                   //     break;
+                    }
+               //     else{
+               //         this.number++;
+              //      }
+             //   }
+           //     this.number=0;
+            //}
         }
 ,
         mounted() {
             axios.get(this.url)
                 .then(response => (this.jsonData = response));
-
-            //this.objetJS = JSON.parse(this.jsonData);
-
-            this.json_good=this.url;
-
-            ///FAIRE UN FOR DANS LE JSON
-                ///SI ON TROUVE ALORS ON MET LE BON TRUC
-            ///SINON ON AUGMENTE LA PAGE JUSQUAU MAX
-
         }
     }
 </script>
