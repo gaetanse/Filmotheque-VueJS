@@ -1,7 +1,12 @@
 <template>
     <div class="about">
         <h1>Page de vos films favoris</h1>
-        Vos favoris sont vides !
+        <h5 v-if="awesome">
+            <h3 v-for="(data, index) in favori" :key='index'>
+                {{ data }}
+            </h3>
+        </h5>
+        <h5 v-else>Vos favoris sont vides 😢</h5>
     </div>
 </template>
 

@@ -1,58 +1,15 @@
 <template>
   <div class="liste">
-    <h2>{{titre}}</h2>
     <div class="holder">
+      <hr>
       <form @submit.prevent="addItem">
         <div class="input">
-          <label for="name">Acteur </label>
+          <label for="name">Tapez le nom du film (ou qzdqd ou qzddqz ou dwzdzq) :</label>
           <input type="text" name="nom" class="form-control" v-model="nom" v-validate="'alpha'">
           <span v-show="errors.has('nom')" class="alert">{{ errors.first('nom') }}</span>
         </div>
-        <div class="input">
-          <label for="role">Rôle </label>
-          <input type="text" id="role" class="form-control" name="role" v-model="role" v-validate="'alpha'">
-          <span v-show="errors.has('role')" class="alert">{{ errors.first('role') }}</span>
-        </div><br>
-        <p><button  type="submit" class="btn btn-primary mb-2">Validation</button></p>
       </form>
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Acteur</th>
-          <th>Rôle</th>
-          <th>Acteur nouveau | Rôle nouveau</th>
-          <th>Modifier</th>
-          <th>Supprimer</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(data, index) in items" :key='index'>
-            <td>{{data.acteur}}</td>
-            <td>{{data.role}}</td>
-          <td>
-          <form @submit.prevent="modif_Val">
-            <div class="input">
-            <input type="text" :id="'i1-' + index" name="texte1" v-model="data.acteur">
-              <span v-show="errors.has('data.acteur')" class="alert">{{ errors.first('data.acteur') }}</span>
-            <input type="text"  :id="'i2-' + index" name="texte2" v-model="data.role" >
-                <span v-show="errors.has('data.role')" class="alert">{{ errors.first('data.role') }}</span>
-            </div>
-          </form>
-            </td>
-          <td>
-            <form @submit.prevent="modif_Val">
-              <p><button type="submit" v-on:click.self="modif_Val(index,data.acteur,data.role),modif" class="btn btn-primary mb-2">Modifier</button></p>
-            </form>
-          </td>
-          <td><img src="../../image/delete.png" v-on:click="remove(index)"/></td>
-        </tr>
-        </tbody>
-      </table>
-      <div v-bind:class="{ alert: showAlert }">
-        <p v-if="items.length >= 1">Nombre d'acteurs dans la base : {{items.length}}</p>
-        <p v-else>Pas d'acteurs dans la base !</p>
-      </div>
-    </div>
+  </div>
   </div>
 
 </template>
@@ -71,7 +28,6 @@
     name: 'Items',
     data() {
       return {
-        titre: 'Liste des rôles d\'un film',
         nom: '',
         role: '',
         texte1_new: '',
