@@ -52,7 +52,6 @@
                 json_match: null,
                 page: 1,
                 page_max: 20402,
-                tab_id: [],
                 number: 0,
                 position: -1,
                 title : "",
@@ -66,7 +65,6 @@
                 this.json_match= null;
 
                 while(this.position===-1){
-                    //this.position = this.jsonData['data']['results'][this.number]['title'].search(this.title);
                     this.position = this.jsonData['data']['results'][this.number]['title'].toLowerCase().search(this.title);
                     if(this.position!==-1){
                         this.json_match = this.jsonData['data']['results'][this.number];
@@ -78,26 +76,7 @@
                 this.page++;
                 this.url = "https://api.themoviedb.org/3/discover/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&language=fr-FR&page="+this.page.toString();
 
-
-
-
-              //  function estCerises() {
-               //     return this.json_match === this.title;
-               // }
-
-              //  this.jsonData['data']['results'][this.number]['title'].find(estCerises);
-
-              //  while(this.number<999){
-                //    if(this.jsonData['data']['results'][this.number]['title'].includes(this.title)){
-                     //   this.json_match = this.jsonData['data']['results'][this.number]['title'];
-                   //     break;
-                    }
-               //     else{
-               //         this.number++;
-              //      }
-             //   }
-           //     this.number=0;
-            //}
+            }
         }
 ,
         mounted() {
