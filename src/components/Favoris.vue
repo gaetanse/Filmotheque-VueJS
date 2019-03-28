@@ -2,6 +2,7 @@
     <div class="about">
         <hr>
         <h1>Page de vos films favoris</h1>
+        <hr>
         <h5 v-if="awesome">
             <h3 v-for="(data, index) in favori" :key='index'>
                 {{ data }}

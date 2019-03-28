@@ -11,6 +11,6 @@
 <style>
 #app {
   text-align: center;
-  margin-top: 60px;
+  margin-top: 15px;
 }
 </style>
