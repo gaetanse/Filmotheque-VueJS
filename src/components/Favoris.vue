@@ -17,10 +17,6 @@
         data() {
             return {
                 favori: []
-            }},
-            methods: {
-                addFavori() {
-                }
-            }
+            }}
     }
 </script>
