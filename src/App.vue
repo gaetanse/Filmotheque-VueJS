@@ -13,12 +13,10 @@
           <li class="nav-item">
             <router-link to="/favoris"><a class="nav-link" href="#">Favoris</a></router-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
         </ul>
       </div>
     </nav>
+    <router-view/>
 </div>
 </template>
 
