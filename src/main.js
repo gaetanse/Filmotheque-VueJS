@@ -9,6 +9,7 @@ import ResetInput from 'v-reset-input';
 import VueLocalStorage from 'vue-localstorage'
 
 import axios from 'axios';
+import store from "./store";
 
 Vue.use(BootstrapVue);
 Vue.use(ResetInput);
@@ -18,5 +19,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

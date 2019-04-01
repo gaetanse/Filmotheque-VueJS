@@ -17,7 +17,7 @@ export default new Router({
             component: Favoris
         },
         {
-            path: '/infos/',
+            path: '/infos/:id',
             name: 'infos',
             component: Infos
         }
