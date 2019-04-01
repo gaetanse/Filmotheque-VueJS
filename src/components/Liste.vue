@@ -12,26 +12,25 @@
                     </div>
                 </form>
             </div>
-                <hr>
-                    <h3 v-for="(data, index) in jsonData['data']['results']" :key='index'>
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ data['title'] }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/data['title']" style="width: 30%;">
-                                <hr>
-                                <p class="card-text">{{ data['overview'] }}</p>
-                                <a href="" class="btn btn-primary">Infos du film</a>
-                                <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
-                            </div>
-                            <div class="card-footer text-muted">
-                                {{ data['release_date']}}
-                            </div>
-                        </div>
-                    </h3>
-            </div>
         </div>
+            <hr>
+        <div class="container-fluid">
+            <div class="card" style="width: 18rem;" v-for="(data, index) in jsonData['data']['results']" :key='index'>
+
+                <div class="row">
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data['title'] }}</h5>
+                        <p class="card-text">{{ data['overview'] }}</p>
+                        <button class="btn btn-primary">Infos du film</button>
+                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Content here -->
+        </div>
+    </div>
 </template>
 
 <style>
@@ -54,6 +53,7 @@
                 jsonFav: null,
                 title : "",
                 url: "",
+                url_base: "https://image.tmdb.org/t/p/w500/",
                 numbers: [1, 2, 3]
             }},
         methods: {
@@ -65,11 +65,15 @@
                     this.$store.commit('SET_FAVORI', this.jsonFav);
                 }
                 })},
+            },
+            assembler(lien){
+                this.jsonData= null;
+                return this.url_base+lien;
+            },
             callMethod : function (){
                 this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query="+this.title;
                 axios.get(this.url).then(response => (this.jsonData = response))
-            }
-        },
+            },
         mounted() {
             axios.get(this.url).then(response => (this.jsonData = response));
         },
