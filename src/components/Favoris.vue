@@ -3,29 +3,36 @@
         <hr>
         <h1>Page de vos films favoris</h1>
         <hr>
-        <h5 v-if="awesome">
+        <h5 v-if="favori">
             <h3 v-for="(data, index) in favori" :key='index'>
-                {{ data }} <img src="">
-            </h3>
+                {{ data }}
+                testtest
+        </h3>
         </h5>
         <h5 v-else>Vos favoris sont vides </h5>
-        <button type="button" class="close" aria-label="Close">
+    <button type="button" class="close" aria-label="Close">
         </button>
-    </div>
-</template>
+        </div>
+        </template>
 
-<script>
+        <script>
     import axios from 'axios';
     export default {
+        name: 'Favoris',
         data() {
             return {
                 favori: [],
                 url: "",
-                jsonData: null,
             }},
+        props:{
+            numbers: Array
+        },
+        created() {
+            this.favori = this.$store.state.listeFavoris
+        },
         methods: {
             removeFav(x) {
-                this.favori.splice(x, 1);
+                       vori.splice(x, 1);
             }
         }
     }

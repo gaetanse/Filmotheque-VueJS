@@ -45,6 +45,7 @@
 
 <script>
     import axios from 'axios';
+    import Favoris from "./Favoris";
     export default {
         data() {
             return {
@@ -52,14 +53,16 @@
                 title : "",
                 url: "",
                 url_base: "https://image.tmdb.org/t/p/w500/",
+                numbers: [1, 2, 3]
             }},
         methods: {
             addFav(id) {
                 this.url_fav = "https://api.themoviedb.org/3/movie/"+id+"?api_key=1d853ccc3f76e0d7e6544802f27005df";
                 axios.get(this.url_fav).then(response => (this.jsonData = response));
-                this.favori.push(this.jsonData['data']);
+                this.$store.state.listeFavoris.push(this.jsonData);
             },
             assembler(lien){
+                this.jsonData= null;
                 return this.url_base+lien;
             },
             callMethod : function (){
@@ -69,6 +72,9 @@
         },
         mounted() {
             axios.get(this.url).then(response => (this.jsonData = response));
+        },
+        components: {
+            Favoris
         }
     }
 </script>
