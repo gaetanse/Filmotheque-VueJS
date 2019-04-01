@@ -5,7 +5,8 @@
         <hr>
         <h5 v-if="favori">
             <h3 v-for="(data, index) in favori" :key='index'>
-                {{ data }} <img src="">
+                {{ data }}
+                testtest
         </h3>
         </h5>
         <h5 v-else>Vos favoris sont vides </h5>
@@ -22,10 +23,12 @@
             return {
                 favori: [],
                 url: "",
-                jsonData: null,
             }},
+        props:{
+            numbers: Array
+        },
         created() {
-            this.favori = this.$store.getters.laListeFavoris
+            this.favori = this.$store.state.listeFavoris
         },
         methods: {
             removeFav(x) {
