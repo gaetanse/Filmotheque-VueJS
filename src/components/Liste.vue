@@ -51,6 +51,7 @@
         data() {
             return {
                 jsonData: null,
+                jsonFav: null,
                 title : "",
                 url: "",
                 numbers: [1, 2, 3]
@@ -58,10 +59,12 @@
         methods: {
             addFav(id) {
                 this.url_fav = "https://api.themoviedb.org/3/movie/"+id+"?api_key=1d853ccc3f76e0d7e6544802f27005df";
-                axios.get(this.url_fav).then(response => (this.jsonData = response));
-                this.$store.state.listeFavoris.push(this.jsonData);
-                this.jsonData= null;
-            },
+                axios.get(this.url_fav).then(response => (this.jsonFav = response)).then((response)=> {
+              //  this.$store.state.listeFavoris.push(this.jsonFav);
+                if (response.data.status){
+                    this.$store.commit('SET_FAVORI', this.jsonFav);
+                }
+                })},
             callMethod : function (){
                 this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query="+this.title;
                 axios.get(this.url).then(response => (this.jsonData = response))
