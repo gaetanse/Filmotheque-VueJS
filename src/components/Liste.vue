@@ -14,10 +14,8 @@
             </div>
         </div>
             <hr>
-        <div class="container-fluid">
+        <div class="row align-items-center" style="height: 100%;width: 100%;">
             <div class="card" style="width: 18rem;" v-for="(data, index) in jsonData['data']['results']" :key='index'>
-
-                <div class="row">
                     <img v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
@@ -25,8 +23,6 @@
                         <button class="btn btn-primary">Infos du film</button>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
-                </div>
-
             </div>
             <!-- Content here -->
         </div>
