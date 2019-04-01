@@ -14,6 +14,21 @@
                 <hr>
                 {{ text }}
                 <hr>
+                <div class="bfh-selectbox bfh-countries" data-country="US" data-flags="true">
+                <input type="hidden" value="">
+                <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
+                    <span class="bfh-selectbox-option input-medium" data-option=""></span>
+                    <b class="caret"></b>
+                </a>
+                <div class="bfh-selectbox-options">
+                    <input type="text" class="bfh-selectbox-filter">
+                    <div role="listbox">
+                        <ul role="option">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <hr>
                 <h5 v-if="json_match">
                     <div class="card text-center">
                         <div class="card-header">
@@ -95,10 +110,10 @@
                             this.number=0;
                             this.num++;
                             this.url = "https://api.themoviedb.org/3/discover/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&page="+this.num;
-                            axios.get(this.url).then(response => (this.jsonData = response));
+                            //axios.get(this.url).then(response => (this.jsonData = response));
                             this.taille_results=this.jsonData['data']['results'].length;
                         }
-                        if(this.num>=50){
+                        if(this.num>=1000){
                             this.text="pas trouvé";
                             break;
                         }

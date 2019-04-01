@@ -8,7 +8,9 @@
                 {{ data }} <img src="">
             </h3>
         </h5>
-        <h5 v-else>Vos favoris sont vides 😢</h5>
+        <h5 v-else>Vos favoris sont vides </h5>
+        <button type="button" class="close" aria-label="Close">
+        </button>
     </div>
 </template>
 
