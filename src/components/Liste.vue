@@ -38,19 +38,16 @@
     }
 </style>
 
-
 <script>
     import axios from 'axios';
-    import Favoris from "./Favoris";
     export default {
         data() {
             return {
-                jsonData: null,
-                jsonFav: null,
                 title : "",
                 url: "",
                 url_base: "https://image.tmdb.org/t/p/w500/",
-                numbers: [1, 2, 3]
+                jsonData:null,
+                jsonFav:null
             }},
         methods: {
             addFav(id) {
@@ -73,8 +70,9 @@
         mounted() {
             axios.get(this.url).then(response => (this.jsonData = response));
         },
-        components: {
-            Favoris
+        callMethod : function () {
+            this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query=" + this.title;
+            axios.get(this.url).then(response => (this.jsonData = response))
         }
-    }
+}
 </script>
