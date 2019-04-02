@@ -61,7 +61,6 @@
                     this.$store.commit('SET_FAVORI', this.jsonFav);
                 }
                 })},
-            },
             assembler(lien){
                 this.jsonData= null;
                 return this.url_base+lien;
@@ -70,6 +69,7 @@
                 this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query="+this.title;
                 axios.get(this.url).then(response => (this.jsonData = response))
             },
+        },
         mounted() {
             axios.get(this.url).then(response => (this.jsonData = response));
         },
