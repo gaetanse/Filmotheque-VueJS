@@ -8,23 +8,67 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Rechercher</span>
                         </div>
-                        <input type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title" v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title"
+                               v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username"
+                               aria-describedby="basic-addon1">
                     </div>
                 </form>
             </div>
         </div>
-            <hr>
-        <div class="row align-items-center" style="height: 100%;width: 100%;">
-            <div class="card" style="width: 18rem;" v-for="(data, index) in jsonData['data']['results']" :key='index'>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" class="card-img-top">
+        <hr>
+        <!--  <div class="card" style="width: 18rem;" v-for="(data, index) in jsonData['data']['results']" :key='index'>
+                  <img v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" class="card-img-top">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ data['title'] }}</h5>
+                      <p class="card-text">{{ data['overview'] }}</p>
+                      <button class="btn btn-primary">Infos du film</button>
+                      <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
+                  </div>
+          </div> -->
+        <!-- Content here -->
+        <div class="container" v-for="(data, index) in jsonData['data']['results']" :key='index'>
+            <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
+                         alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
                         <p class="card-text">{{ data['overview'] }}</p>
                         <button class="btn btn-primary">Infos du film</button>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data['title'] }}</h5>
+                        <p class="card-text">{{ data['overview'] }}</p>
+                        <button class="btn btn-primary">Infos du film</button>
+                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data['title'] }}</h5>
+                        <p class="card-text">{{ data['overview'] }}</p>
+                        <button class="btn btn-primary">Infos du film</button>
+                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data['title'] }}</h5>
+                        <p class="card-text">{{ data['overview'] }}</p>
+                        <button class="btn btn-primary">Infos du film</button>
+                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
+                    </div>
+                </div>
             </div>
-            <!-- Content here -->
         </div>
     </div>
 </template>
@@ -40,39 +84,47 @@
 
 <script>
     import axios from 'axios';
+
     export default {
         data() {
             return {
-                title : "",
+                title: "",
                 url: "",
+                compteur: 0,
                 url_base: "https://image.tmdb.org/t/p/w500/",
-                jsonData:null,
-                jsonFav:null
-            }},
+                jsonData: null,
+                jsonFav: null
+            }
+        },
         methods: {
-            addFav(id) {
-                this.url_fav = "https://api.themoviedb.org/3/movie/"+id+"?api_key=1d853ccc3f76e0d7e6544802f27005df";
-                axios.get(this.url_fav).then(response => (this.jsonFav = response)).then((response)=> {
-              //  this.$store.state.listeFavoris.push(this.jsonFav);
-                if (response.data.status){
-                    this.$store.commit('SET_FAVORI', this.jsonFav);
+            retourLigne() {
+                if (this.compteur < 4) {
+                    this.compteur = this.compteur + 1;
+                } else {
+                    this.compteur = 0;
+                    return true;
                 }
-                })},
-            assembler(lien){
-                this.jsonData= null;
-                return this.url_base+lien;
             },
-            callMethod : function (){
-                this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query="+this.title;
+            addFav(id) {
+                this.url_fav = "https://api.themoviedb.org/3/movie/" + id + "?api_key=1d853ccc3f76e0d7e6544802f27005df";
+                axios.get(this.url_fav).then(response => (this.jsonFav = response)).then((response) => {
+                    //  this.$store.state.listeFavoris.push(this.jsonFav);
+                    if (response.data.status) {
+                        this.$store.commit('SET_FAVORI', this.jsonFav);
+                    }
+                })
+            },
+            assembler(lien) {
+                this.jsonData = null;
+                return this.url_base + lien;
+            },
+            callMethod: function () {
+                this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query=" + this.title;
                 axios.get(this.url).then(response => (this.jsonData = response))
             },
         },
         mounted() {
             axios.get(this.url).then(response => (this.jsonData = response));
         },
-        callMethod : function () {
-            this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query=" + this.title;
-            axios.get(this.url).then(response => (this.jsonData = response))
-        }
-}
+    }
 </script>
