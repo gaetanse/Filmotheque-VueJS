@@ -4,7 +4,7 @@
         <h1>Page de vos films favoris</h1>
     <div class="row align-items-center" style="height: 100%">
         <h5 v-if="tabFavoris">
-        <h3 v-for="(data, index) in tabFavoris['data']" :key='index'>
+        <h3 v-for="(data, index) in tabFavoris" :key='index'>
             {{ data }}
             <div class="card text-center">
                 <div class="card-header">
