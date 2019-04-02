@@ -14,9 +14,6 @@
           <li class="nav-item">
             <router-link to="/favoris"><a class="nav-link" href="#">Favoris</a></router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/infos"><a class="nav-link" href="#">Infos d'un film</a></router-link>
-          </li>
         </ul>
       </div>
     </nav>
