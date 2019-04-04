@@ -4,26 +4,7 @@
         <h1>Page de vos films favoris</h1>
         <hr>
         <div v-if="!tabFavoris">Vous n'avez aucun favoris</div>
-      <!--  <div class="row align-items-center" style="height: 100%">
-            <div v-if="tabFavoris">
-                <div class="card text-center" v-for="(data, index) in tabFavoris" :key='index'>
-                    <div class="card-header">
-                        <h5 class="card-title">{{ data['data']['title'] }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['data']['poster_path']" style="width: 30%;">
-                        <hr>
-                        <p class="card-text">{{ data['data']['overview'] }}</p>
-                    </div>
-                    <div class="card-footer text-muted">
-                        {{ data['data']['release_date']}}
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="close" aria-label="Close">
-            </button>
-        </div>-->
-        <table class="table table-striped">
+        <table v-if="tabFavoris" class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Titre</th>
@@ -65,12 +46,9 @@
         },
         methods: {
             remove(i) {
-                this.$store.commit('DELETE_FAVORI',i)
-            },
-            sauver() {
-                localStorage.listeFavoris = JSON.stringify(this.tabFavoris)
+                this.$store.commit('DELETE_FAVORI',i);
+                this.$router.go();
             }
-
         }
     }
 </script>
