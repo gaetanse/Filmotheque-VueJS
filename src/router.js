@@ -8,17 +8,17 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'liste',
+            commentaire: 'liste',
             component: Liste
         },
         {
             path: '/favoris/',
-            name: 'favoris',
+            commentaire: 'favoris',
             component: Favoris
         },
         {
             path: '/infos/:id',
-            name: 'infos',
+            commentaire: 'infos',
             component: Infos
         }
     ]

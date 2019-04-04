@@ -31,12 +31,12 @@
         <b-modal
                 id="modal-prevent"
                 ref="modal"
-                title="Submit your name"
+                title="Veuillez entrer votre commentaire"
                 @ok="handleOk"
-                @shown="clearName"
+                @shown="clearCom"
         >
             <form @submit.stop.prevent="handleSubmit">
-                <b-form-input v-model="name" placeholder="Enter your name"></b-form-input>
+                <b-form-input v-model="commentaire" placeholder="Entrez votre commentaire"></b-form-input>
             </form>
         </b-modal>
     </div>
@@ -47,8 +47,8 @@
         name: 'Favoris',
         data() {
             return {
-                name: '',
-                names: [],
+                commentaire: '',
+                commentaires: [],
                 leFavori: [],
                 url: "",
             }
@@ -70,21 +70,22 @@
             addEval(data) {
 
             },
-            clearName() {
-                this.name = ''
+            clearCom() {
+                this.commentaire = ''
             },
             handleOk(evt) {
                 // Prevent modal from closing
                 evt.preventDefault();
-                if (!this.name) {
-                    alert('Please enter your name')
+                if (!this.commentaire) {
+                    alert('Veuille entrer votre commentaire')
                 } else {
                     this.handleSubmit()
                 }
             },
             handleSubmit() {
-                this.names.push(this.name);
-                this.clearName();
+                this.commentaires.push(this.commentaire);
+                this.clearCom();
+                this.
                 this.$nextTick(() => {
                     // Wrapped in $nextTick to ensure DOM is rendered before closing
                     this.$refs.modal.hide()
