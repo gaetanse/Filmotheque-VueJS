@@ -14,11 +14,11 @@ import store from "./store";
 Vue.use(BootstrapVue);
 Vue.use(ResetInput);
 Vue.use(VeeValidate);
-Vue.use(VueLocalStorage)
+Vue.use(VueLocalStorage);
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
