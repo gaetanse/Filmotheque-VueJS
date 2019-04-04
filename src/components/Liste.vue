@@ -17,59 +17,37 @@
         </div>
         <hr>
 
-        <h1 v-if="jsonData!==null">
+        <div v-if="jsonData!==null">
+            <div class="card-deck">
+                <div class="card" v-for="(data, index) in jsonData['data']['results']" :key='index'>
 
-        <div class="container" v-for="(data, index) in jsonData['data']['results']" :key='index'>
-            <div class="card-group">
-                <div class="card">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
-                         alt="Card image cap">
+                    <div v-if="data['poster_path']!==null">
+                        <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']">
+                    </div>
+                    <div v-else>
+                        <img class="card-img-top" src="../assets/nop.jpg">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
                         <p class="card-text">{{ data['overview'] }}</p>
                         <button class="btn btn-primary">Infos du film</button>
+                        <br><br>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ data['title'] }}</h5>
-                        <p class="card-text">{{ data['overview'] }}</p>
-                        <button class="btn btn-primary">Infos du film</button>
-                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
+
                 </div>
-                <div class="card">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ data['title'] }}</h5>
-                        <p class="card-text">{{ data['overview'] }}</p>
-                        <button class="btn btn-primary">Infos du film</button>
-                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ data['title'] }}</h5>
-                        <p class="card-text">{{ data['overview'] }}</p>
-                        <button class="btn btn-primary">Infos du film</button>
-                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
-                    </div>
-                </div>
-            </div>
+            <br>
+
         </div>
-
-        </h1>
 
     </div>
 </template>
 
 <style>
+    .card-deck .card {
+        max-width: calc(25% - 30px);
+    }
     .input {
         box-shadow: 0 0 5px rgba(0, 0, 0, 1);
         padding: 3px 0px 3px 3px;
@@ -109,8 +87,6 @@
             },
         },
         mounted() {
-            if(this.title==="")
-                this.jsonData=null;
             if(this.title!=="")
                 axios.get(this.url).then(response => (this.jsonData = response));
         },
