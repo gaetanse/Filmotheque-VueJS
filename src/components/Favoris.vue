@@ -4,22 +4,19 @@
         <h1>Page de vos films favoris</h1>
     <div class="row align-items-center" style="height: 100%">
         <h5 v-if="tabFavoris">
-        <h3 v-for="(data, index) in tabFavoris" :key='index'>
-            {{ data }}
-            <div class="card text-center">
+            <div class="card text-center" v-for="(data, index) in tabFavoris" :key='index'>
                 <div class="card-header">
-                    <h5 class="card-title">{{ data['title'] }}</h5>
+                    <h5 class="card-title">{{ data['data']['title'] }}</h5>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/data['title']" style="width: 30%;">
+                    <img class="card-img-top" src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" style="width: 30%;">
                     <hr>
-                    <p class="card-text">{{ data['overview'] }}</p>
+                    <p class="card-text">{{ data['data']['overview'] }}</p>
                 </div>
                 <div class="card-footer text-muted">
-                    {{ data['release_date']}}
+                    {{ data['data']['release_date']}}
                 </div>
             </div>
-        </h3>
         </h5>
         <h5 v-else>Vos favoris sont vides </h5>
         <button type="button" class="close" aria-label="Close">
@@ -33,21 +30,17 @@
         name: 'Favoris',
         data() {
             return {
-                favori: [],
+                leFavori: [],
                 url: "",
             }},
         computed: {
             tabFavoris : function () {
+                console.log(this.$store.getters.laListeFavoris);
                 return this.$store.getters.laListeFavoris;
             }
         },
         props:{
             numbers: Array
-        },
-        mounted(){
-            if (localStorage.listeFavoris){
-                this.$store.commit('SET_FAVORIS', JSON.parse(localStorage.listeFavoris))
-            }
         },
         methods: {
             remove(i) {
