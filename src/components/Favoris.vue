@@ -2,8 +2,10 @@
     <div class="favoris">
         <hr>
         <h1>Page de vos films favoris</h1>
-        <div class="row align-items-center" style="height: 100%">
-            <h5 v-if="tabFavoris">
+        <hr>
+        <div v-if="!tabFavoris">Vous n'avez aucun favoris</div>
+      <!--  <div class="row align-items-center" style="height: 100%">
+            <div v-if="tabFavoris">
                 <div class="card text-center" v-for="(data, index) in tabFavoris" :key='index'>
                     <div class="card-header">
                         <h5 class="card-title">{{ data['data']['title'] }}</h5>
@@ -17,11 +19,30 @@
                         {{ data['data']['release_date']}}
                     </div>
                 </div>
-            </h5>
-            <h5 v-else>Vos favoris sont vides </h5>
+            </div>
             <button type="button" class="close" aria-label="Close">
             </button>
-        </div>
+        </div>-->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Résumé</th>
+                <th scope="col">Commentaire</th>
+                <th scope="col">Evaluation</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody v-for="(data, index) in tabFavoris" :key='index'>
+            <tr>
+                <th scope="row">{{ data['data']['title'] }}</th>
+                <td>{{ data['data']['overview'] }}</td>
+                <td>manger</td>
+                <td>test</td>
+                <td><button v-on:click="remove(data['id'])" class="btn btn-primary">Supprimer</button></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
