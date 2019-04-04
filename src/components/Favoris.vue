@@ -16,11 +16,15 @@
                     <div class="card-footer text-muted">
                         {{ data['data']['release_date']}}
                     </div>
+
+
+                    <button class="btn btn-primary">Infos du film</button>
+                    <br>
+                    <button class="btn btn-primary">Supprimer en favoris</button>
+
                 </div>
             </h5>
             <h5 v-else>Vos favoris sont vides </h5>
-            <button type="button" class="close" aria-label="Close">
-            </button>
         </div>
     </div>
 </template>

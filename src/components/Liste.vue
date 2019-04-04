@@ -1,8 +1,8 @@
 <template>
     <div class="liste">
         <div class="row align-items-center" style="height: 100%">
-            <div class="col-md-6 mx-auto">
-                <hr>
+            <div class=" mx-auto">
+                <br><br>
                 <form @submit.prevent="">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -16,10 +16,16 @@
             </div>
         </div>
         <hr>
+        <br>
 
         <div v-if="jsonData!==null">
-            <div class="card-deck">
-                <div class="card" v-for="(data, index) in jsonData['data']['results']" :key='index'>
+
+            <div class="container">
+                <section class="row">
+
+                <div class="col-xl-2 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;">
+
+                    <br>
 
                     <div v-if="data['poster_path']!==null">
                         <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']">
@@ -34,20 +40,20 @@
                         <br><br>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
-                    </div>
-
                 </div>
-            <br>
 
+                </section>
+
+            </div>
         </div>
 
     </div>
 </template>
 
 <style>
-    .card-deck .card {
-        max-width: calc(25% - 30px);
-    }
+
+    [class*="col"] { margin-bottom: 3%; }
+
     .input {
         box-shadow: 0 0 5px rgba(0, 0, 0, 1);
         padding: 3px 0px 3px 3px;
