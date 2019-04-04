@@ -16,16 +16,9 @@
             </div>
         </div>
         <hr>
-        <!--  <div class="card" style="width: 18rem;" v-for="(data, index) in jsonData['data']['results']" :key='index'>
-                  <img v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']" class="card-img-top">
-                  <div class="card-body">
-                      <h5 class="card-title">{{ data['title'] }}</h5>
-                      <p class="card-text">{{ data['overview'] }}</p>
-                      <button class="btn btn-primary">Infos du film</button>
-                      <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
-                  </div>
-          </div> -->
-        <!-- Content here -->
+
+        <h1 v-if="jsonData!==null">
+
         <div class="container" v-for="(data, index) in jsonData['data']['results']" :key='index'>
             <div class="card-group">
                 <div class="card">
@@ -70,6 +63,9 @@
                 </div>
             </div>
         </div>
+
+        </h1>
+
     </div>
 </template>
 
@@ -96,34 +92,27 @@
             }
         },
         methods: {
-            retourLigne() {
-                if (this.compteur < 4) {
-                    this.compteur = this.compteur + 1;
-                } else {
-                    this.compteur = 0;
-                    return true;
-                }
-            },
             addFav(id) {
                 this.url_fav = "https://api.themoviedb.org/3/movie/" + id + "?api_key=1d853ccc3f76e0d7e6544802f27005df";
                 axios.get(this.url_fav).then(response => (this.jsonFav = response)).then((response) => {
-                    //  this.$store.state.listeFavoris.push(this.jsonFav);
                     if (response.data.status) {
                         this.$store.commit('SET_FAVORI', this.jsonFav);
                     }
                 })
             },
-            assembler(lien) {
-                this.jsonData = null;
-                return this.url_base + lien;
-            },
             callMethod: function () {
-                this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query=" + this.title;
-                axios.get(this.url).then(response => (this.jsonData = response))
+                this.url = "https://api.themoviedb.org/3/search/movie?api_key=1d853ccc3f76e0d7e6544802f27005df&query="+this.title;
+                if(this.title==="")
+                    this.jsonData=null;
+                if(this.title!=="")
+                    axios.get(this.url).then(response => (this.jsonData = response));
             },
         },
         mounted() {
-            axios.get(this.url).then(response => (this.jsonData = response));
+            if(this.title==="")
+                this.jsonData=null;
+            if(this.title!=="")
+                axios.get(this.url).then(response => (this.jsonData = response));
         },
     }
 </script>
