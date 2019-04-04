@@ -83,6 +83,7 @@
                 console.log(commentaire);
                 FavF[this.evalId]['data'].commentaire = commentaire;
                 console.log(FavF[this.evalId]);
+                this.$store.commit('SET_FAVORI', FavF[this.evalId]);
 
             },
             sendInfo(item) {
