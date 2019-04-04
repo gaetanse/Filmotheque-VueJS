@@ -23,7 +23,7 @@
             <div class="container">
                 <section class="row">
 
-                <div class="col-xl-2 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;">
+                <div class="col-xl-3 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;">
 
                     <br>
 
@@ -35,8 +35,18 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
-                        <p class="card-text">{{ data['overview'] }}</p>
-                        <button class="btn btn-primary">Infos du film</button>
+                        <div class="card-text">
+
+                            <div v-if="data['overview'].length>max_string">
+                                {{ string_couper(data['overview']) }} . . .
+                            </div>
+                            <div v-else>
+                                {{ data['overview'] }}
+                            </div>
+                            <br>
+
+                        </div>
+                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Infos du film</button>
                         <br><br>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
@@ -70,12 +80,27 @@
                 title: "",
                 url: "",
                 compteur: 0,
+                max_string: 150,
+                postBody: '',
                 url_base: "https://image.tmdb.org/t/p/w500/",
                 jsonData: null,
                 jsonFav: null
             }
         },
         methods: {
+            string_couper(string){
+                return string.substr(0, this.max_string);
+            },
+            postPost() {
+                axios.post(`http://jsonplaceholder.typicode.com/posts`, {
+                    body: this.postBody
+                })
+                    .then(response => {
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            },
             addFav(id) {
                 this.url_fav = "https://api.themoviedb.org/3/movie/" + id + "?api_key=1d853ccc3f76e0d7e6544802f27005df";
                 axios.get(this.url_fav).then(response => (this.jsonFav = response)).then((response) => {

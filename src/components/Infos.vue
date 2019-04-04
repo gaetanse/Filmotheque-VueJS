@@ -1,6 +1,8 @@
 <template>
     <div class="infos">
-    Infos d'un film :
+    Infos d'un film
+        <hr>
+
     </div>
 </template>
 
@@ -8,6 +10,7 @@
     export default {
         data() {
             return {
+                url:"",
                 jsonData: null,
             }}
     }
