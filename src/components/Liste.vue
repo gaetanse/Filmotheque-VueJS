@@ -24,6 +24,9 @@
                     <div v-if="data['poster_path']!==null">
                         <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']">
                     </div>
+                    <div v-else>
+                        <img class="card-img-top" src="../assets/nop.jpg">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
                         <p class="card-text">{{ data['overview'] }}</p>
