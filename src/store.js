@@ -18,6 +18,7 @@ export default new Vuex.Store({
             localStorage.listeFavoris = JSON.stringify(state.listeFavoris);
         },
         SET_FAVORI: (state, leFavori) => {
+            console.log (state.listeFavoris);
             state.listeFavoris.push(leFavori);
             localStorage.listeFavoris = JSON.stringify(state.listeFavoris);
         },

@@ -18,7 +18,7 @@
                 <th scope="row">{{ data['data']['title'] }}</th>
                 <td>{{ data['data']['overview'] }}</td>
                 <td>
-                    <b-button class="btn btn-primary" v-b-modal.modal-prevent>Evaluer</b-button>
+                    <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer</b-button>
                 </td>
                 <td>
                     <button v-on:click="remove(data['id'])" class="btn btn-danger">Supprimer</button>
@@ -32,9 +32,8 @@
                 id="modal-prevent"
                 ref="modal"
                 title="Veuillez entrer votre commentaire"
-                @ok="handleOk"
-                @shown="clearCom"
-        >
+                @ok="handleOk(commentaire)">
+
             <form @submit.stop.prevent="handleSubmit">
                 <b-form-input v-model="commentaire" placeholder="Entrez votre commentaire"></b-form-input>
             </form>
@@ -48,6 +47,7 @@
         data() {
             return {
                 commentaire: '',
+                evalId: 'tesst',
                 commentaires: [],
                 leFavori: [],
                 url: "",
@@ -55,7 +55,6 @@
         },
         computed: {
             tabFavoris: function () {
-                console.log(JSON.parse(localStorage.getItem("listeFavoris")));
                 return JSON.parse(localStorage.getItem("listeFavoris"));
             }
         },
@@ -70,26 +69,24 @@
             addEval(data) {
 
             },
-            clearCom() {
-                this.commentaire = ''
-            },
-            handleOk(evt) {
+            handleOk(commentaire) {
                 // Prevent modal from closing
-                evt.preventDefault();
+                // id.preventDefault();
                 if (!this.commentaire) {
                     alert('Veuille entrer votre commentaire')
                 } else {
-                    this.handleSubmit()
+                    this.handleSubmit(commentaire)
                 }
             },
-            handleSubmit() {
-                this.commentaires.push(this.commentaire);
-                this.clearCom();
-                this.
-                this.$nextTick(() => {
-                    // Wrapped in $nextTick to ensure DOM is rendered before closing
-                    this.$refs.modal.hide()
-                })
+            handleSubmit(commentaire) {
+                let FavF = JSON.parse(localStorage.getItem("listeFavoris"));
+                console.log(commentaire);
+                FavF[this.evalId]['data'].commentaire = commentaire;
+                console.log(FavF[this.evalId]);
+
+            },
+            sendInfo(item) {
+                this.evalId = item;
             }
         }
     }
