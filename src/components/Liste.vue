@@ -4,11 +4,11 @@
             <div class=" mx-auto">
                 <br><br>
                 <form @submit.prevent="">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Rechercher</span>
                         </div>
-                        <input type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title"
+                        <input  style="width: 500px" type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title"
                                v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username"
                                aria-describedby="basic-addon1">
                     </div>
@@ -23,7 +23,7 @@
             <div class="container">
                 <section class="row">
 
-                <div class="col-xl-3 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;">
+                <div class="col-xl-3 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;" >
 
                     <br>
 
@@ -46,7 +46,7 @@
                             <br>
 
                         </div>
-                        <button v-on:click="addFav(data['id'])" class="btn btn-primary">Infos du film</button>
+                        <button v-on:click="getPost(data['id'])" class="btn btn-primary">Infos du film</button>
                         <br><br>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
@@ -61,18 +61,13 @@
 </template>
 
 <style>
-
     [class*="col"] { margin-bottom: 3%; }
-
-    .input {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-        padding: 3px 0px 3px 3px;
-        margin: 5px 1px 3px 0px;
-        border: 1px solid rgba(0, 0, 0, 1);
-    }
 </style>
 
 <script>
+    /**
+ * @jest-environment node
+ */
     import axios from 'axios';
     export default {
         data() {
@@ -81,25 +76,19 @@
                 url: "",
                 compteur: 0,
                 max_string: 150,
-                postBody: '',
+                postBody: "",
                 url_base: "https://image.tmdb.org/t/p/w500/",
                 jsonData: null,
-                jsonFav: null
+                jsonFav: null,
+                params: []
             }
         },
         methods: {
             string_couper(string){
                 return string.substr(0, this.max_string);
             },
-            postPost() {
-                axios.post(`http://jsonplaceholder.typicode.com/posts`, {
-                    body: this.postBody
-                })
-                    .then(response => {
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
+            getPost(id) {
+                window.location = '/#/infos?num='+id;
             },
             addFav(id) {
                 this.url_fav = "https://api.themoviedb.org/3/movie/" + id + "?api_key=1d853ccc3f76e0d7e6544802f27005df";
@@ -120,6 +109,6 @@
         mounted() {
             if(this.title!=="")
                 axios.get(this.url).then(response => (this.jsonData = response));
-        },
+        }
     }
 </script>
