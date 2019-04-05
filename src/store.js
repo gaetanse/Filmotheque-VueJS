@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import {getById} from "bootstrap-vue/src/utils/dom";
 
 Vue.use(Vuex);
 
@@ -23,7 +24,7 @@ export default new Vuex.Store({
         },
         SET_FAVORIS: (state, lesFavoris) => {
             state.listeFavoris = lesFavoris;
-            localStorage.listeFavoris = JSON.stringify(leFavori);
+            localStorage.listeFavoris = JSON.stringify(lesFavoris);
         }
     }
 });

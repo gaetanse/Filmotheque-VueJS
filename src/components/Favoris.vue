@@ -20,7 +20,8 @@
                 <td>{{ data['data']['overview'] }}</td>
                 <td>{{ data['data']['commentaire'] }}</td>
                 <td>
-                    <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer</b-button>
+                    <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer
+                    </b-button>
                 </td>
                 <td>
                     <button v-on:click="remove(data['id'])" class="btn btn-danger">Supprimer</button>
@@ -66,9 +67,14 @@
         methods: {
             remove(i) {
                 this.$store.commit('DELETE_FAVORI', i);
-                //this.$router.go(0); // <--- c'est sa qui fait bug les suppressions !!
+                this.$router.go();
+            },
+            addEval(data) {
+
             },
             handleOk(commentaire) {
+                // Prevent modal from closing
+                // id.preventDefault();
                 if (!this.commentaire) {
                     alert('Veuille entrer votre commentaire')
                 } else {
@@ -77,11 +83,10 @@
             },
             handleSubmit(commentaire) {
                 let FavF = JSON.parse(localStorage.getItem("listeFavoris"));
-                console.log(commentaire);
                 FavF[this.evalId]['data'].commentaire = commentaire;
-                console.log(FavF[this.evalId]);
-                this.remove(FavF['id']);
+                this.$store.commit('DELETE_FAVORI', FavF[this.evalId]);
                 this.$store.commit('SET_FAVORI', FavF[this.evalId]);
+                this.$router.go();
 
             },
             sendInfo(item) {
