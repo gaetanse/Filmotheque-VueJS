@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Résumé</th>
+                <th scope="col">Commentaire</th>
                 <th scope="col">Evaluation</th>
                 <th scope="col">Supprimer</th>
             </tr>
@@ -17,6 +18,7 @@
             <tr>
                 <th scope="row">{{ data['data']['title'] }}</th>
                 <td>{{ data['data']['overview'] }}</td>
+                <td>{{ data['data']['commentaire'] }}</td>
                 <td>
                     <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer</b-button>
                 </td>
@@ -64,14 +66,9 @@
         methods: {
             remove(i) {
                 this.$store.commit('DELETE_FAVORI', i);
-                this.$router.go();
-            },
-            addEval(data) {
-
+                //this.$router.go(0); // <--- c'est sa qui fait bug les suppressions !!
             },
             handleOk(commentaire) {
-                // Prevent modal from closing
-                // id.preventDefault();
                 if (!this.commentaire) {
                     alert('Veuille entrer votre commentaire')
                 } else {
@@ -83,6 +80,7 @@
                 console.log(commentaire);
                 FavF[this.evalId]['data'].commentaire = commentaire;
                 console.log(FavF[this.evalId]);
+                this.remove(FavF['id']);
                 this.$store.commit('SET_FAVORI', FavF[this.evalId]);
 
             },
