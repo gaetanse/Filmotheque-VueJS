@@ -9,46 +9,135 @@
             <div class="card mx-auto" style="width: 85%;">
 
                 <br>
-
                 <div v-if="jsonData['data']['poster_path']!==null">
+                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['poster_path']" style="width: 70%;">
+                </div>
+                <div v-else>
+                    <img class="card-img-top" src="../assets/nop.jpg">
+                </div>
+                <hr>
+
+                <div v-if="jsonData['data']['backdrop_path']!==null">
                     <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['backdrop_path']" style="width: 70%;">
                 </div>
                 <div v-else>
                     <img class="card-img-top" src="../assets/nop.jpg">
                 </div>
+                <hr>
                 <div class="card-body">
-                    <h5 class="card-title">{{ jsonData['data']['title'] }}</h5>
+                    <h5 class="card-title">
+                        <div v-if="jsonData['data']['title']!==null">
+                        {{ jsonData['data']['title'] }}
+                        </div>
+                        <div v-else>Pas de titre</div>
+                    </h5>
                     <div class="card-text">
+                        <div v-if="jsonData['data']['overview']!==null">
                             {{ jsonData['data']['overview'] }}
+                        </div>
+                        <div v-else>Pas de résumé</div>
                         <br>
 
                         <hr>
-                        Film pour adulte : {{ jsonData['data']['adult'] }}
+                            <div v-if="jsonData['data']['adult']!==null">
+                                Film pour adulte : {{ jsonData['data']['adult'] }}
+                            </div>
+                        <div v-else>Pas de classement pegi</div>
                         <hr>
-                        Budget : {{ jsonData['data']['budget'] }}
+                            <div v-if="jsonData['data']['genres']!==null">
+                        Genres :<br>
+                        <div v-for="(data, index) in jsonData['data']['genres']" :key='index'>
+                            {{ data['name'] }}
+                        </div>
+                            </div>
+                        <div v-else>Pas de genre</div>
                         <hr>
-                        Langue original : {{ jsonData['data']['original_language'] }}
+                        <div v-if="jsonData['data']['production_companies']!==null">
+                        Compagnies de production :<br>
+                        <div v-for="(data, index) in jsonData['data']['production_companies']" :key='index'>
+                            {{ data['name'] }} / {{ data['origin_country'] }}
+                        </div>
+                        </div>
+                        <div v-else>Pas de compagnies de production</div>
                         <hr>
-                        Titre original : {{ jsonData['data']['original_title'] }}
+                        <div v-if="jsonData['data']['production_countries']!==null">
+                        Pays de production :<br>
+                        <div v-for="(data, index) in jsonData['data']['production_countries']" :key='index'>
+                            {{ data['name'] }} / {{ data['iso_3166_1'] }}
+                        </div>
+                        </div>
+                        <div v-else>Pas de pays de production</div>
                         <hr>
+                        <div v-if="jsonData['data']['spoken_languages']!==null">
+                        Langues parlées:<br>
+                        <div v-for="(data, index) in jsonData['data']['spoken_languages']" :key='index'>
+                            {{ data['name'] }} / {{ data['iso_639_1'] }}
+                        </div>
+                        </div>
+                        <div v-else>Pas de langues parlées</div>
+                        <hr>
+                        <div v-if="jsonData['data']['homepage']!==null">
+                            Page d'accueil : {{ jsonData['data']['homepage']
+                        </div>
+                        <div v-else>Pas de page d'accueil</div>
+                        <hr>
+                        <div v-if="jsonData['data']['status']!==null">
+                        Status : {{ jsonData['data']['status'] }}
+                        </div>
+                        <div v-else>Pas de status</div>
+                        <hr>
+                        <div v-if="jsonData['data']['tagline']!==''">
+                        Slogan : {{ jsonData['data']['tagline'] }}
+                        </div>
+                        <div v-else>Pas de slogan</div>
+                        <hr>
+                            <div v-if="jsonData['data']['video']!==null">
+                        Vidéo : {{ jsonData['data']['video'] }}
+                            </div>
+                        <div v-else>Pas de vidéo</div>
+                        <hr>
+                                <div v-if="jsonData['data']['runtime']!==null">
+                        Runtime : {{ jsonData['data']['runtime'] }}
+                                </div>
+                        <div v-else>Pas de runtime</div>
+                        <hr>
+                                    <div v-if="jsonData['data']['popularity']!==null">
                         Popularité : {{ jsonData['data']['popularity'] }}
+                                    </div>
+                        <div v-else>Pas de popularité</div>
                         <hr>
+                                        <div v-if="jsonData['data']['budget']!==null">
+                        Budget : {{ jsonData['data']['budget'] }}
+                                        </div>
+                        <div v-else>Pas de budget</div>
+                        <hr>
+                                                <div v-if="jsonData['data']['vote_average']!==null">
+                        Moyenne des votes : {{ jsonData['data']['vote_average'] }}
+                                                </div>
+                        <div v-else>Pas de moyenne des votes</div>
+                        <hr>
+                                                    <div v-if="jsonData['data']['vote_count']!==null">
+                        Nombre de votes : {{ jsonData['data']['vote_count'] }}
+                                                    </div>
+                        <div v-else>Pas de nombre de votes</div>
+                        <hr>
+                                                        <div v-if="jsonData['data']['original_title']!==null">
+                        Titre original : {{ jsonData['data']['original_title'] }}
+                                                        </div>
+                        <div v-else>Pas de titre original</div>
+                        <hr>
+                                                                <div v-if="jsonData['data']['release_date']!==null">
                         Date de sortie : {{ jsonData['data']['release_date'] }}
+                                                                </div>
+                        <div v-else>Pas de date de sortie</div>
                         <hr>
+                                                                    <div v-if="jsonData['data']['revenue']!==null">
                         Revenue : {{ jsonData['data']['revenue'] }}
+                                                                    </div>
+                        <div v-else>Pas de revenue</div>
                         <hr>
-
-                        # mettre tous les trucs du JSON MDR ON SAMUSE et rajouter des IF
-
-                        /*
-
-                        { "data": { "adult": false, "backdrop_path": "/sycS64dwK8eRxMeKALPE29z0HXv.jpg", "belongs_to_collection": null, "budget": 13000000, "genres": [ { "id": 35, "name": "Comedy" } ], "homepage": "http://stvincent-movie.com/", "id": 239563, "imdb_id": "tt2170593", "original_language": "en", "original_title": "St. Vincent", "overview": "A young boy whose parents just divorced finds an unlikely friend and mentor in the misanthropic, bawdy, hedonistic, war veteran who lives next door.", "popularity": 12.164, "poster_path": "/w0hzr4eQBk1X4m63fb7sOSt9Bnn.jpg", "production_companies": [ { "id": 7076, "logo_path": "/8BFxn9NUWSgp0ndih569Gm62xiC.png", "name": "Chernin Entertainment", "origin_country": "US" }, { "id": 308, "logo_path": "/e8F3mQM7DkJ5SfYYDp8FYzPBOGX.png", "name": "The Weinstein Company", "origin_country": "US" }, { "id": 3314, "logo_path": null, "name": "Crescendo Productions", "origin_country": "" }, { "id": 15855, "logo_path": null, "name": "Goldenlight Films", "origin_country": "" } ], "production_countries": [ { "iso_3166_1": "US", "name": "United States of America" } ], "release_date": "2014-10-09", "revenue": 54837234, "runtime": 102, "spoken_languages": [ { "iso_639_1": "en", "name": "English" } ], "status": "Released", "tagline": "Love Thy Neighbor", "title": "St. Vincent", "video": false, "vote_average": 7.1, "vote_count": 1045 }, "status": 200, "statusText": "OK", "headers": { "etag": "W/\"4082bfd3afdbb50984412c89a0507f52\"", "x-ratelimit-remaining": "39", "content-type": "application/json;charset=utf-8", "cache-control": "public, max-age=28800", "x-ratelimit-reset": "1554377798", "x-ratelimit-limit": "40" }, "config": { "transformRequest": {}, "transformResponse": {}, "timeout": 0, "xsrfCookieName": "XSRF-TOKEN", "xsrfHeaderName": "X-XSRF-TOKEN", "maxContentLength": -1, "headers": { "Accept": "application/json, text/plain, */*" }, "method": "get", "url": "https://api.themoviedb.org/3/movie/239563?api_key=1d853ccc3f76e0d7e6544802f27005df" }, "request": {} }
-
-                        */
 
                     </div>
-                    <button v-on:click="getPost(jsonData['data']['id'])" class="btn btn-primary">Infos du film</button>
-                    <br><br>
                     <button v-on:click="addFav(jsonData['data']['id'])" class="btn btn-primary">Mettre en favoris</button>
                 </div>
             </div>
@@ -87,6 +176,14 @@
             });
         },
         methods: {
+            addFav(id) {
+                this.url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=1d853ccc3f76e0d7e6544802f27005df";
+                axios.get(this.url).then(response => (this.jsonData = response)).then((response) => {
+                    if (response.data.status) {
+                        this.$store.commit('SET_FAVORI', this.jsonData);
+                    }
+                })
+            },
             string_couper(string) {
                 return string.substr(0, this.max_string);
             }
