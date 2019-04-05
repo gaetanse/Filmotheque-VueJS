@@ -29,11 +29,9 @@
 
                 </div>
 
-
-
                 <h1 class="card-title" style="margin-left: 420px;margin-top: -150px;">
                     <div v-if="jsonData['data']['title']!==null">
-                        Titre : {{ jsonData['data']['title'] }}
+                        {{ jsonData['data']['title'] }}
                     </div>
                     <div v-else>Pas de titre</div>
                 </h1>
