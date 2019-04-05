@@ -34,10 +34,12 @@
         <b-modal
                 id="modal-prevent"
                 ref="modal"
-                title="Veuillez entrer votre commentaire"
-                @ok="handleOk(commentaire)">
+                title="Veuillez entrer votre evaluation"
+                @ok="handleOk(commentaire, evaluation)">
 
             <form @submit.stop.prevent="handleSubmit">
+                <b-form-input v-model="evaluation" placeholder="Entrez votre evaluation"></b-form-input>
+                <hr>
                 <b-form-input v-model="commentaire" placeholder="Entrez votre commentaire"></b-form-input>
             </form>
         </b-modal>
@@ -49,6 +51,7 @@
         name: 'Favoris',
         data() {
             return {
+                evaluation: null,
                 commentaire: '',
                 evalId: 'tesst',
                 commentaires: [],
@@ -72,18 +75,21 @@
             addEval(data) {
 
             },
-            handleOk(commentaire) {
+            handleOk(commentaire, evaluation) {
                 // Prevent modal from closing
                 // id.preventDefault();
-                if (!this.commentaire) {
-                    alert('Veuille entrer votre commentaire')
+                if (!this.evaluation) {
+                    alert('Veuille entrer votre evaluation')
                 } else {
-                    this.handleSubmit(commentaire)
+                    this.handleSubmit(commentaire, evaluation)
                 }
             },
-            handleSubmit(commentaire) {
+            handleSubmit(commentaire, evaluation) {
                 let FavF = JSON.parse(localStorage.getItem("listeFavoris"));
-                FavF[this.evalId]['data'].commentaire = commentaire;
+                FavF[this.evalId]['data'].evaluation = evaluation;
+                if (commentaire) {
+                    FavF[this.evalId]['data'].commentaire = commentaire;
+                }
                 this.$store.commit('DELETE_FAVORI', FavF[this.evalId]);
                 this.$store.commit('SET_FAVORI', FavF[this.evalId]);
                 this.$router.go();
