@@ -35,8 +35,6 @@
             </tr>
             </tbody>
         </table>
-
-        <!-- Modal Component -->
         <b-modal
                 id="modal-prevent"
                 ref="modal"
