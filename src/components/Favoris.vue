@@ -18,7 +18,8 @@
                 <th scope="row">{{ data['data']['title'] }}</th>
                 <td>{{ data['data']['overview'] }}</td>
                 <td>
-                    <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer</b-button>
+                    <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Evaluer
+                    </b-button>
                 </td>
                 <td>
                     <button v-on:click="remove(data['id'])" class="btn btn-danger">Supprimer</button>
@@ -80,10 +81,10 @@
             },
             handleSubmit(commentaire) {
                 let FavF = JSON.parse(localStorage.getItem("listeFavoris"));
-                console.log(commentaire);
                 FavF[this.evalId]['data'].commentaire = commentaire;
-                console.log(FavF[this.evalId]);
+                this.$store.commit('DELETE_FAVORI', FavF[this.evalId]);
                 this.$store.commit('SET_FAVORI', FavF[this.evalId]);
+                this.$router.go();
 
             },
             sendInfo(item) {
