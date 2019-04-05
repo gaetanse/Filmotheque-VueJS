@@ -9,28 +9,38 @@
             <div class="card mx-auto" style="width: 85%;">
 
                 <br>
-                <div v-if="jsonData['data']['poster_path']!==null">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['poster_path']" style="width: 70%;">
-                </div>
-                <div v-else>
-                    <img class="card-img-top" src="../assets/nop.jpg">
-                </div>
-                <hr>
 
-                <div v-if="jsonData['data']['backdrop_path']!==null">
-                    <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['backdrop_path']" style="width: 70%;">
+                <div class="list-group list-group-horizontal">
+
+                    <div v-if="jsonData['data']['poster_path']!==null">
+                        <img class=" w-50 card-img" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['poster_path']" style="margin-left: 200px;">
+                    </div>
+                    <div v-else>
+                        <img class="mx-auto w-50 card-img-top" src="../assets/nop.jpg">
+                    </div>
+                    <hr>
+
+                    <div v-if="jsonData['data']['backdrop_path']!==null">
+                        <img class="  card-img" v-bind:src="'https://image.tmdb.org/t/p/w500/'+jsonData['data']['backdrop_path']" style="padding-right: 200px;">
+                    </div>
+                    <div v-else>
+                        <img class="mx-auto w-100 card-img-top" src="../assets/nop.jpg">
+                    </div>
+
                 </div>
-                <div v-else>
-                    <img class="card-img-top" src="../assets/nop.jpg">
-                </div>
-                <hr>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <div v-if="jsonData['data']['title']!==null">
-                        {{ jsonData['data']['title'] }}
-                        </div>
-                        <div v-else>Pas de titre</div>
-                    </h5>
+
+
+
+                <h1 class="card-title" style="margin-left: 420px;margin-top: -150px;">
+                    <div v-if="jsonData['data']['title']!==null">
+                        Titre : {{ jsonData['data']['title'] }}
+                    </div>
+                    <div v-else>Pas de titre</div>
+                </h1>
+
+                <div class="card-body" style="margin-top: 100px;">
+                    <hr>
+
                     <div class="card-text">
                         <div v-if="jsonData['data']['overview']!==null">
                             {{ jsonData['data']['overview'] }}
@@ -77,7 +87,7 @@
                         <div v-else>Pas de langues parlées</div>
                         <hr>
                         <div v-if="jsonData['data']['homepage']!==null">
-                            Page d'accueil : {{ jsonData['data']['homepage']
+                            Page d'accueil : {{ jsonData['data']['homepage'] }}
                         </div>
                         <div v-else>Pas de page d'accueil</div>
                         <hr>
