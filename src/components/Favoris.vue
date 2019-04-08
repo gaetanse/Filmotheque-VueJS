@@ -100,8 +100,7 @@
                 }
                 this.$store.commit('DELETE_FAVORI', FavF[this.evalId]);
                 this.$store.commit('SET_FAVORI', FavF[this.evalId]);
-                this.$router.go();
-
+                this.tabFavoris = this.$store.getters.laListeFavoris;
             },
             sendInfo(item) {
                 this.evalId = item;
