@@ -26,11 +26,10 @@
                     <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Noter
                     </b-button>
                 </td>
-                <td>
-                    <button v-on:click="getPost(data['data']['id'])" class="btn btn-primary">Infos</button>
+                <td>   <button v-on:click="getPost(data['data']['id'])" class="btn btn-primary">Infos</button>
                 </td>
                 <td>
-                    <button v-on:click="remove(data['id'])" class="btn btn-danger">Supprimer</button>
+                    <button @click="remove(index)" class="btn btn-danger">Supprimer</button>
                 </td>
             </tr>
             </tbody>
@@ -64,24 +63,29 @@
             }
         },
         computed: {
-            tabFavoris: function () {
-                return JSON.parse(localStorage.getItem("listeFavoris"));
+            tabFavoris : function () {
+                return this.$store.getters.laListeFavoris;
             }
         },
+        mounted() {
+            if (localStorage.listeFavoris) {
+                this.$store.commit('SET_FAVORIS', JSON.parse(localStorage.listeFavoris))
+            }
+        },
+
         props: {
             numbers: Array
         },
         methods: {
             remove(i) {
+                console.log(i);
                 this.$store.commit('DELETE_FAVORI', i);
-                this.$router.go();
+                this.tabFavoris = this.$store.getters.laListeFavoris;
             },
             getPost(id) {
                 window.location = '/#/infos?num='+id;
             },
             handleOk(commentaire, evaluation) {
-                // Prevent modal from closing
-                // id.preventDefault();
                 if (!this.evaluation) {
                     alert('Veuille entrer votre evaluation')
                 } else {
