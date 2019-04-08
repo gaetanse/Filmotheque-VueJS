@@ -12,6 +12,7 @@
                 <th scope="col">Commentaire</th>
                 <th scope="col">Evaluation</th>
                 <th scope="col">Noter</th>
+                <th scope="col">Infos du film</th>
                 <th scope="col">Supprimer</th>
             </tr>
             </thead>
@@ -25,14 +26,14 @@
                     <b-button class="btn btn-primary" v-b-modal="'modal-prevent'" @click="sendInfo(index)">Noter
                     </b-button>
                 </td>
+                <td>   <button v-on:click="getPost(data['data']['id'])" class="btn btn-primary">Infos</button>
+                </td>
                 <td>
                     <button @click="remove(index)" class="btn btn-danger">Supprimer</button>
                 </td>
             </tr>
             </tbody>
         </table>
-
-        <!-- Modal Component -->
         <b-modal
                 id="modal-prevent"
                 ref="modal"
@@ -80,6 +81,9 @@
                 console.log(i);
                 this.$store.commit('DELETE_FAVORI', i);
                 this.tabFavoris = this.$store.getters.laListeFavoris;
+            },
+            getPost(id) {
+                window.location = '/#/infos?num='+id;
             },
             handleOk(commentaire, evaluation) {
                 // Prevent modal from closing

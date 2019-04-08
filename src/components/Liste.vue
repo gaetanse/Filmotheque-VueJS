@@ -8,25 +8,18 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Rechercher</span>
                         </div>
-                        <input  style="width: 500px" type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title"
-                               v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username"
-                               aria-describedby="basic-addon1">
+                        <input  style="width: 500px" type="text" v-on:keyup="callMethod" name="title" class="form-control" v-model="title" v-validate="'alpha'" placeholder="Tapez votre film" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </form>
             </div>
         </div>
         <hr>
         <br>
-
         <div v-if="jsonData!==null">
-
             <div class="container">
                 <section class="row">
-
                 <div class="col-xl-3 card" v-for="(data, index) in jsonData['data']['results']" :key='index' style="margin-left: 50px;" >
-
                     <br>
-
                     <div v-if="data['poster_path']!==null">
                         <img class="card-img-top" v-bind:src="'https://image.tmdb.org/t/p/w500/'+data['poster_path']">
                     </div>
@@ -36,27 +29,20 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ data['title'] }}</h5>
                         <div class="card-text">
-
-                            <div v-if="data['overview'].length>max_string">
-                                {{ string_couper(data['overview']) }} . . .
-                            </div>
+                            <div v-if="data['overview'].length>max_string">{{ string_couper(data['overview']) }} . . .</div>
                             <div v-else>
                                 {{ data['overview'] }}
                             </div>
                             <br>
-
                         </div>
                         <button v-on:click="getPost(data['id'])" class="btn btn-primary">Infos du film</button>
                         <br><br>
                         <button v-on:click="addFav(data['id'])" class="btn btn-primary">Mettre en favoris</button>
                     </div>
                 </div>
-
                 </section>
-
             </div>
         </div>
-
     </div>
 </template>
 
