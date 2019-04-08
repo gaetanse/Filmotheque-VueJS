@@ -16,6 +16,7 @@ export default new Vuex.Store({
     mutations: {
         DELETE_FAVORI: (state, indexFavori) => {
             state.listeFavoris.splice(indexFavori, 1);
+            console.log(JSON.stringify(state.listeFavoris));
             localStorage.listeFavoris = JSON.stringify(state.listeFavoris);
         },
         SET_FAVORI: (state, leFavori) => {
@@ -25,6 +26,6 @@ export default new Vuex.Store({
         SET_FAVORIS: (state, lesFavoris) => {
             state.listeFavoris = lesFavoris;
             localStorage.listeFavoris = JSON.stringify(lesFavoris);
-        }
+        },
     }
 });

@@ -26,7 +26,7 @@
                     </b-button>
                 </td>
                 <td>
-                    <button v-on:click="remove(data['id'])" class="btn btn-danger">Supprimer</button>
+                    <button @click="remove(index)" class="btn btn-danger">Supprimer</button>
                 </td>
             </tr>
             </tbody>
@@ -62,20 +62,24 @@
             }
         },
         computed: {
-            tabFavoris: function () {
-                return JSON.parse(localStorage.getItem("listeFavoris"));
+            tabFavoris : function () {
+                return this.$store.getters.laListeFavoris;
             }
         },
+        mounted() {
+            if (localStorage.listeFavoris) {
+                this.$store.commit('SET_FAVORIS', JSON.parse(localStorage.listeFavoris))
+            }
+        },
+
         props: {
             numbers: Array
         },
         methods: {
             remove(i) {
+                console.log(i);
                 this.$store.commit('DELETE_FAVORI', i);
-                this.$router.go();
-            },
-            addEval(data) {
-
+                this.tabFavoris = this.$store.getters.laListeFavoris;
             },
             handleOk(commentaire, evaluation) {
                 // Prevent modal from closing
