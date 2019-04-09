@@ -78,7 +78,6 @@
         },
         methods: {
             remove(i) {
-                console.log(i);
                 this.$store.commit('DELETE_FAVORI', i);
                 this.tabFavoris = this.$store.getters.laListeFavoris;
             },
