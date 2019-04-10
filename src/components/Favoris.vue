@@ -9,8 +9,8 @@
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Résumé</th>
-                <th scope="col">Commentaire</th>
                 <th scope="col">Evaluation</th>
+                <th scope="col">Commentaire</th>
                 <th scope="col">Noter</th>
                 <th scope="col">Infos du film</th>
                 <th scope="col">Supprimer</th>
@@ -78,7 +78,6 @@
         },
         methods: {
             remove(i) {
-                console.log(i);
                 this.$store.commit('DELETE_FAVORI', i);
                 this.tabFavoris = this.$store.getters.laListeFavoris;
             },

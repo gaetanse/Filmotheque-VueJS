@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import {getById} from "bootstrap-vue/src/utils/dom";
 
 Vue.use(Vuex);
 
