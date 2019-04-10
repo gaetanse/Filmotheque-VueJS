@@ -175,13 +175,7 @@
             }
             this.id = search_params.substr(compteur+1,(search_params.length-compteur));
             this.url="https://api.themoviedb.org/3/movie/"+ this.id +"?api_key=1d853ccc3f76e0d7e6544802f27005df";
-
-            console.log(this.id);
-            axios.get(this.url).then(response => (this.jsonData = response)).then((response) => {
-                if (response.data.status) {
-                    console.log("ok");
-                }
-            });
+            axios.get(this.url).then(response => (this.jsonData = response));
         },
         methods: {
             addFav(id) {
