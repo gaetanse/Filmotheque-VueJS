@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "ajv-keywords": "3.4.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.15",
     "v-reset-input": "^1.1.2",
